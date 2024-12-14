@@ -1,0 +1,462 @@
+[
+    {
+        "label": "scrapy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "scrapy",
+        "description": "scrapy",
+        "detail": "scrapy",
+        "documentation": {}
+    },
+    {
+        "label": "signals",
+        "importPath": "scrapy",
+        "description": "scrapy",
+        "isExtraImport": true,
+        "detail": "scrapy",
+        "documentation": {}
+    },
+    {
+        "label": "BooksItem",
+        "importPath": "books.items",
+        "description": "books.items",
+        "isExtraImport": true,
+        "detail": "books.items",
+        "documentation": {}
+    },
+    {
+        "label": "is_item",
+        "importPath": "itemadapter",
+        "description": "itemadapter",
+        "isExtraImport": true,
+        "detail": "itemadapter",
+        "documentation": {}
+    },
+    {
+        "label": "ItemAdapter",
+        "importPath": "itemadapter",
+        "description": "itemadapter",
+        "isExtraImport": true,
+        "detail": "itemadapter",
+        "documentation": {}
+    },
+    {
+        "label": "ItemAdapter",
+        "importPath": "itemadapter",
+        "description": "itemadapter",
+        "isExtraImport": true,
+        "detail": "itemadapter",
+        "documentation": {}
+    },
+    {
+        "label": "pymongo",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "DropItem",
+        "importPath": "scrapy.exceptions",
+        "description": "scrapy.exceptions",
+        "isExtraImport": true,
+        "detail": "scrapy.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "pformat",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "jmespath",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "jmespath",
+        "description": "jmespath",
+        "detail": "jmespath",
+        "documentation": {}
+    },
+    {
+        "label": "exceptions",
+        "importPath": "jmespath",
+        "description": "jmespath",
+        "isExtraImport": true,
+        "detail": "jmespath",
+        "documentation": {}
+    },
+    {
+        "label": "BookSpider",
+        "kind": 6,
+        "importPath": "books.books.spiders.book",
+        "description": "books.books.spiders.book",
+        "peekOfCode": "class BookSpider(scrapy.Spider):\n    name = \"book\"\n    allowed_domains = [\"books.toscrape.com\"]\n    start_urls = [\"https://books.toscrape.com/\"]\n    def parse(self, response):\n        for book in response.css(\"article.product_pod\"):\n            item = BooksItem()\n            item[\"url\"] = book.css(\"h3 > a::attr(href)\").get()\n            item[\"title\"] = book.css(\"h3 > a::attr(title)\").get()\n            item[\"price\"] = book.css(\".price_color::text\").get()",
+        "detail": "books.books.spiders.book",
+        "documentation": {}
+    },
+    {
+        "label": "BooksItem",
+        "kind": 6,
+        "importPath": "books.books.items",
+        "description": "books.books.items",
+        "peekOfCode": "class BooksItem(scrapy.Item):\n    # define the fields for your item here like:\n    # name = scrapy.Field()\n    _id = scrapy.Field()\n    url = scrapy.Field()\n    title = scrapy.Field()\n    price = scrapy.Field()\n    pass",
+        "detail": "books.books.items",
+        "documentation": {}
+    },
+    {
+        "label": "BooksSpiderMiddleware",
+        "kind": 6,
+        "importPath": "books.books.middlewares",
+        "description": "books.books.middlewares",
+        "peekOfCode": "class BooksSpiderMiddleware:\n    # Not all methods need to be defined. If a method is not defined,\n    # scrapy acts as if the spider middleware does not modify the\n    # passed objects.\n    @classmethod\n    def from_crawler(cls, crawler):\n        # This method is used by Scrapy to create your spiders.\n        s = cls()\n        crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)\n        return s",
+        "detail": "books.books.middlewares",
+        "documentation": {}
+    },
+    {
+        "label": "BooksDownloaderMiddleware",
+        "kind": 6,
+        "importPath": "books.books.middlewares",
+        "description": "books.books.middlewares",
+        "peekOfCode": "class BooksDownloaderMiddleware:\n    # Not all methods need to be defined. If a method is not defined,\n    # scrapy acts as if the downloader middleware does not modify the\n    # passed objects.\n    @classmethod\n    def from_crawler(cls, crawler):\n        # This method is used by Scrapy to create your spiders.\n        s = cls()\n        crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)\n        return s",
+        "detail": "books.books.middlewares",
+        "documentation": {}
+    },
+    {
+        "label": "MongoPipeline",
+        "kind": 6,
+        "importPath": "books.books.pipelines",
+        "description": "books.books.pipelines",
+        "peekOfCode": "class MongoPipeline:\n    COLLECTION_NAME = \"books\"\n    def __init__(self, mongo_uri, mongo_db):\n        self.mongo_uri = mongo_uri\n        self.mongo_db = mongo_db\n    @classmethod\n    def from_crawler(cls, crawler):\n        return cls(\n            mongo_uri=crawler.settings.get(\"MONGO_URI\"),\n            mongo_db=crawler.settings.get(\"MONGO_DATABASE\"),",
+        "detail": "books.books.pipelines",
+        "documentation": {}
+    },
+    {
+        "label": "BooksPipeline",
+        "kind": 6,
+        "importPath": "books.books.pipelines",
+        "description": "books.books.pipelines",
+        "peekOfCode": "class BooksPipeline:\n    def process_item(self, item, spider):\n        return item",
+        "detail": "books.books.pipelines",
+        "documentation": {}
+    },
+    {
+        "label": "BOT_NAME",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "BOT_NAME = \"books\"\nSPIDER_MODULES = [\"books.spiders\"]\nNEWSPIDER_MODULE = \"books.spiders\"\n# Crawl responsibly by identifying yourself (and your website) on the user-agent\n#USER_AGENT = \"books (+http://www.yourdomain.com)\"\n# Obey robots.txt rules\nROBOTSTXT_OBEY = True\n# Configure maximum concurrent requests performed by Scrapy (default: 16)\n#CONCURRENT_REQUESTS = 32\n# Configure a delay for requests for the same website (default: 0)",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SPIDER_MODULES",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "SPIDER_MODULES = [\"books.spiders\"]\nNEWSPIDER_MODULE = \"books.spiders\"\n# Crawl responsibly by identifying yourself (and your website) on the user-agent\n#USER_AGENT = \"books (+http://www.yourdomain.com)\"\n# Obey robots.txt rules\nROBOTSTXT_OBEY = True\n# Configure maximum concurrent requests performed by Scrapy (default: 16)\n#CONCURRENT_REQUESTS = 32\n# Configure a delay for requests for the same website (default: 0)\n# See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "NEWSPIDER_MODULE",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "NEWSPIDER_MODULE = \"books.spiders\"\n# Crawl responsibly by identifying yourself (and your website) on the user-agent\n#USER_AGENT = \"books (+http://www.yourdomain.com)\"\n# Obey robots.txt rules\nROBOTSTXT_OBEY = True\n# Configure maximum concurrent requests performed by Scrapy (default: 16)\n#CONCURRENT_REQUESTS = 32\n# Configure a delay for requests for the same website (default: 0)\n# See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay\n# See also autothrottle settings and docs",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#USER_AGENT",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#USER_AGENT = \"books (+http://www.yourdomain.com)\"\n# Obey robots.txt rules\nROBOTSTXT_OBEY = True\n# Configure maximum concurrent requests performed by Scrapy (default: 16)\n#CONCURRENT_REQUESTS = 32\n# Configure a delay for requests for the same website (default: 0)\n# See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay\n# See also autothrottle settings and docs\n#DOWNLOAD_DELAY = 3\n# The download delay setting will honor only one of:",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROBOTSTXT_OBEY",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "ROBOTSTXT_OBEY = True\n# Configure maximum concurrent requests performed by Scrapy (default: 16)\n#CONCURRENT_REQUESTS = 32\n# Configure a delay for requests for the same website (default: 0)\n# See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay\n# See also autothrottle settings and docs\n#DOWNLOAD_DELAY = 3\n# The download delay setting will honor only one of:\n#CONCURRENT_REQUESTS_PER_DOMAIN = 16\n#CONCURRENT_REQUESTS_PER_IP = 16",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#CONCURRENT_REQUESTS",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#CONCURRENT_REQUESTS = 32\n# Configure a delay for requests for the same website (default: 0)\n# See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay\n# See also autothrottle settings and docs\n#DOWNLOAD_DELAY = 3\n# The download delay setting will honor only one of:\n#CONCURRENT_REQUESTS_PER_DOMAIN = 16\n#CONCURRENT_REQUESTS_PER_IP = 16\n# Disable cookies (enabled by default)\n#COOKIES_ENABLED = False",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#DOWNLOAD_DELAY",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#DOWNLOAD_DELAY = 3\n# The download delay setting will honor only one of:\n#CONCURRENT_REQUESTS_PER_DOMAIN = 16\n#CONCURRENT_REQUESTS_PER_IP = 16\n# Disable cookies (enabled by default)\n#COOKIES_ENABLED = False\n# Disable Telnet Console (enabled by default)\n#TELNETCONSOLE_ENABLED = False\n# Override the default request headers:\n#DEFAULT_REQUEST_HEADERS = {",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#CONCURRENT_REQUESTS_PER_DOMAIN",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#CONCURRENT_REQUESTS_PER_DOMAIN = 16\n#CONCURRENT_REQUESTS_PER_IP = 16\n# Disable cookies (enabled by default)\n#COOKIES_ENABLED = False\n# Disable Telnet Console (enabled by default)\n#TELNETCONSOLE_ENABLED = False\n# Override the default request headers:\n#DEFAULT_REQUEST_HEADERS = {\n#    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\n#    \"Accept-Language\": \"en\",",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#CONCURRENT_REQUESTS_PER_IP",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#CONCURRENT_REQUESTS_PER_IP = 16\n# Disable cookies (enabled by default)\n#COOKIES_ENABLED = False\n# Disable Telnet Console (enabled by default)\n#TELNETCONSOLE_ENABLED = False\n# Override the default request headers:\n#DEFAULT_REQUEST_HEADERS = {\n#    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\n#    \"Accept-Language\": \"en\",\n#}",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#COOKIES_ENABLED",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#COOKIES_ENABLED = False\n# Disable Telnet Console (enabled by default)\n#TELNETCONSOLE_ENABLED = False\n# Override the default request headers:\n#DEFAULT_REQUEST_HEADERS = {\n#    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\n#    \"Accept-Language\": \"en\",\n#}\n# Enable or disable spider middlewares\n# See https://docs.scrapy.org/en/latest/topics/spider-middleware.html",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#TELNETCONSOLE_ENABLED",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#TELNETCONSOLE_ENABLED = False\n# Override the default request headers:\n#DEFAULT_REQUEST_HEADERS = {\n#    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\n#    \"Accept-Language\": \"en\",\n#}\n# Enable or disable spider middlewares\n# See https://docs.scrapy.org/en/latest/topics/spider-middleware.html\n#SPIDER_MIDDLEWARES = {\n#    \"books.middlewares.BooksSpiderMiddleware\": 543,",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#DEFAULT_REQUEST_HEADERS",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#DEFAULT_REQUEST_HEADERS = {\n#    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\n#    \"Accept-Language\": \"en\",\n#}\n# Enable or disable spider middlewares\n# See https://docs.scrapy.org/en/latest/topics/spider-middleware.html\n#SPIDER_MIDDLEWARES = {\n#    \"books.middlewares.BooksSpiderMiddleware\": 543,\n#}\n# Enable or disable downloader middlewares",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#SPIDER_MIDDLEWARES",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#SPIDER_MIDDLEWARES = {\n#    \"books.middlewares.BooksSpiderMiddleware\": 543,\n#}\n# Enable or disable downloader middlewares\n# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html\n#DOWNLOADER_MIDDLEWARES = {\n#    \"books.middlewares.BooksDownloaderMiddleware\": 543,\n#}\n# Enable or disable extensions\n# See https://docs.scrapy.org/en/latest/topics/extensions.html",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#DOWNLOADER_MIDDLEWARES",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#DOWNLOADER_MIDDLEWARES = {\n#    \"books.middlewares.BooksDownloaderMiddleware\": 543,\n#}\n# Enable or disable extensions\n# See https://docs.scrapy.org/en/latest/topics/extensions.html\n#EXTENSIONS = {\n#    \"scrapy.extensions.telnet.TelnetConsole\": None,\n#}\n# Configure item pipelines\n# See https://docs.scrapy.org/en/latest/topics/item-pipeline.html",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#EXTENSIONS",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#EXTENSIONS = {\n#    \"scrapy.extensions.telnet.TelnetConsole\": None,\n#}\n# Configure item pipelines\n# See https://docs.scrapy.org/en/latest/topics/item-pipeline.html\nITEM_PIPELINES = {\n    \"books.pipelines.MongoPipeline\": 300,\n}\n# Enable and configure the AutoThrottle extension (disabled by default)\n# See https://docs.scrapy.org/en/latest/topics/autothrottle.html",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ITEM_PIPELINES",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "ITEM_PIPELINES = {\n    \"books.pipelines.MongoPipeline\": 300,\n}\n# Enable and configure the AutoThrottle extension (disabled by default)\n# See https://docs.scrapy.org/en/latest/topics/autothrottle.html\n#AUTOTHROTTLE_ENABLED = True\n# The initial download delay\n#AUTOTHROTTLE_START_DELAY = 5\n# The maximum download delay to be set in case of high latencies\n#AUTOTHROTTLE_MAX_DELAY = 60",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#AUTOTHROTTLE_ENABLED",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#AUTOTHROTTLE_ENABLED = True\n# The initial download delay\n#AUTOTHROTTLE_START_DELAY = 5\n# The maximum download delay to be set in case of high latencies\n#AUTOTHROTTLE_MAX_DELAY = 60\n# The average number of requests Scrapy should be sending in parallel to\n# each remote server\n#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0\n# Enable showing throttling stats for every response received:\n#AUTOTHROTTLE_DEBUG = False",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#AUTOTHROTTLE_START_DELAY",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#AUTOTHROTTLE_START_DELAY = 5\n# The maximum download delay to be set in case of high latencies\n#AUTOTHROTTLE_MAX_DELAY = 60\n# The average number of requests Scrapy should be sending in parallel to\n# each remote server\n#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0\n# Enable showing throttling stats for every response received:\n#AUTOTHROTTLE_DEBUG = False\n# Enable and configure HTTP caching (disabled by default)\n# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#AUTOTHROTTLE_MAX_DELAY",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#AUTOTHROTTLE_MAX_DELAY = 60\n# The average number of requests Scrapy should be sending in parallel to\n# each remote server\n#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0\n# Enable showing throttling stats for every response received:\n#AUTOTHROTTLE_DEBUG = False\n# Enable and configure HTTP caching (disabled by default)\n# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings\n#HTTPCACHE_ENABLED = True\n#HTTPCACHE_EXPIRATION_SECS = 0",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#AUTOTHROTTLE_TARGET_CONCURRENCY",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0\n# Enable showing throttling stats for every response received:\n#AUTOTHROTTLE_DEBUG = False\n# Enable and configure HTTP caching (disabled by default)\n# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings\n#HTTPCACHE_ENABLED = True\n#HTTPCACHE_EXPIRATION_SECS = 0\n#HTTPCACHE_DIR = \"httpcache\"\n#HTTPCACHE_IGNORE_HTTP_CODES = []\n#HTTPCACHE_STORAGE = \"scrapy.extensions.httpcache.FilesystemCacheStorage\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#AUTOTHROTTLE_DEBUG",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#AUTOTHROTTLE_DEBUG = False\n# Enable and configure HTTP caching (disabled by default)\n# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings\n#HTTPCACHE_ENABLED = True\n#HTTPCACHE_EXPIRATION_SECS = 0\n#HTTPCACHE_DIR = \"httpcache\"\n#HTTPCACHE_IGNORE_HTTP_CODES = []\n#HTTPCACHE_STORAGE = \"scrapy.extensions.httpcache.FilesystemCacheStorage\"\n# Set settings whose default value is deprecated to a future-proof value\nTWISTED_REACTOR = \"twisted.internet.asyncioreactor.AsyncioSelectorReactor\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#HTTPCACHE_ENABLED",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#HTTPCACHE_ENABLED = True\n#HTTPCACHE_EXPIRATION_SECS = 0\n#HTTPCACHE_DIR = \"httpcache\"\n#HTTPCACHE_IGNORE_HTTP_CODES = []\n#HTTPCACHE_STORAGE = \"scrapy.extensions.httpcache.FilesystemCacheStorage\"\n# Set settings whose default value is deprecated to a future-proof value\nTWISTED_REACTOR = \"twisted.internet.asyncioreactor.AsyncioSelectorReactor\"\nFEED_EXPORT_ENCODING = \"utf-8\"\nMONGO_URI = \"mongodb://localhost:27017\"\nMONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#HTTPCACHE_EXPIRATION_SECS",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#HTTPCACHE_EXPIRATION_SECS = 0\n#HTTPCACHE_DIR = \"httpcache\"\n#HTTPCACHE_IGNORE_HTTP_CODES = []\n#HTTPCACHE_STORAGE = \"scrapy.extensions.httpcache.FilesystemCacheStorage\"\n# Set settings whose default value is deprecated to a future-proof value\nTWISTED_REACTOR = \"twisted.internet.asyncioreactor.AsyncioSelectorReactor\"\nFEED_EXPORT_ENCODING = \"utf-8\"\nMONGO_URI = \"mongodb://localhost:27017\"\nMONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#HTTPCACHE_DIR",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#HTTPCACHE_DIR = \"httpcache\"\n#HTTPCACHE_IGNORE_HTTP_CODES = []\n#HTTPCACHE_STORAGE = \"scrapy.extensions.httpcache.FilesystemCacheStorage\"\n# Set settings whose default value is deprecated to a future-proof value\nTWISTED_REACTOR = \"twisted.internet.asyncioreactor.AsyncioSelectorReactor\"\nFEED_EXPORT_ENCODING = \"utf-8\"\nMONGO_URI = \"mongodb://localhost:27017\"\nMONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#HTTPCACHE_IGNORE_HTTP_CODES",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#HTTPCACHE_IGNORE_HTTP_CODES = []\n#HTTPCACHE_STORAGE = \"scrapy.extensions.httpcache.FilesystemCacheStorage\"\n# Set settings whose default value is deprecated to a future-proof value\nTWISTED_REACTOR = \"twisted.internet.asyncioreactor.AsyncioSelectorReactor\"\nFEED_EXPORT_ENCODING = \"utf-8\"\nMONGO_URI = \"mongodb://localhost:27017\"\nMONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "#HTTPCACHE_STORAGE",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "#HTTPCACHE_STORAGE = \"scrapy.extensions.httpcache.FilesystemCacheStorage\"\n# Set settings whose default value is deprecated to a future-proof value\nTWISTED_REACTOR = \"twisted.internet.asyncioreactor.AsyncioSelectorReactor\"\nFEED_EXPORT_ENCODING = \"utf-8\"\nMONGO_URI = \"mongodb://localhost:27017\"\nMONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TWISTED_REACTOR",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "TWISTED_REACTOR = \"twisted.internet.asyncioreactor.AsyncioSelectorReactor\"\nFEED_EXPORT_ENCODING = \"utf-8\"\nMONGO_URI = \"mongodb://localhost:27017\"\nMONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "FEED_EXPORT_ENCODING",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "FEED_EXPORT_ENCODING = \"utf-8\"\nMONGO_URI = \"mongodb://localhost:27017\"\nMONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MONGO_URI",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "MONGO_URI = \"mongodb://localhost:27017\"\nMONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MONGO_DATABASE",
+        "kind": 5,
+        "importPath": "books.books.settings",
+        "description": "books.books.settings",
+        "peekOfCode": "MONGO_DATABASE = \"books_db\"",
+        "detail": "books.books.settings",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "venv.Scripts.jp",
+        "description": "venv.Scripts.jp",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument('expression')\n    parser.add_argument('-f', '--filename',\n                        help=('The filename containing the input data.  '\n                              'If a filename is not given then data is '\n                              'read from stdin.'))\n    parser.add_argument('--ast', action='store_true',\n                        help=('Pretty print the AST, do not search the data.'))\n    args = parser.parse_args()",
+        "detail": "venv.Scripts.jp",
+        "documentation": {}
+    }
+]
